@@ -14,9 +14,9 @@ function rgbToHex(rgb) {
   return hexCode;
 }
 
-const compose = (...fns) => (inputParams) => fns.reduce((acc, fn) => {
+const flow = (...fns) => (inputParams) => fns.reduce((acc, fn) => {
   const result = fn(inputParams, acc);
   return [...acc, ...result];
 }, []);
 
-export { compose, rgbToHex };
+export { flow, rgbToHex };

@@ -1,4 +1,4 @@
-import { compose } from '../utils.js';
+import { flow } from '../utils.js';
 import createCardsBlock from './cards.js';
 import createMediaBlock from './mediaBlock.js';
 
@@ -187,7 +187,7 @@ export default function createTabsBlocks(block, document) {
   const elements = [];
   const inputParams = { block, document };
   tabs = [];
-  const elementList = compose(createTabList, createTab)(inputParams);
+  const elementList = flow(createTabList, createTab)(inputParams);
   elements.push(...elementList);
   block.before(document.createElement('hr'));
   block.replaceWith(...elements);
