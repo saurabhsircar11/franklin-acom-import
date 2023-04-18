@@ -26,8 +26,8 @@ function makeBGImage(block) {
  */
 function makeBGColor(block) {
   return (
-    block.querySelector('div[data-bgcolor]')?.getAttribute('data-bgcolor') ??
-    'No colour'
+    block.querySelector('div[data-bgcolor]')?.getAttribute('data-bgcolor')
+    ?? 'No colour'
   );
 }
 
