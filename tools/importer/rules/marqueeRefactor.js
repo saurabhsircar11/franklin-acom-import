@@ -70,7 +70,7 @@ function marqueeVariation(marqueeHeight) {
 function createMarqueeHeader({ block }) {
   const blockHeight = parseInt(block?.getAttribute('data-height') ?? 0, 10);
   const marqueeHeader = marqueeVariation(blockHeight);
-  return [marqueeHeader];
+  return [[marqueeHeader]];
 }
 
 /**
@@ -84,20 +84,22 @@ function createMarqueeBackground({ block }) {
   const isBgImage = !!block.querySelector('div[style]');
   if (isVideo) {
     const video = makeVideo(block);
-    return [video];
+    return [[video]];
   }
   if (isBackgroundColor) {
     const bgcolor = makeBGColor(block);
-    return [bgcolor];
+    return [[bgcolor]];
   }
   if (isBgImage) {
     const bgImage = makeBGImage(block);
-    return [bgImage];
+    return [[bgImage]];
   }
   return [];
 }
 
-function createMarqueeData({ block, document }) {}
+function createMarqueeData() {
+  return [];
+}
 
 /**
  * Function for building Marquee,
@@ -120,8 +122,8 @@ function createMarquee(block, document) {
 
 export default function createMarqueeBlocks(block, document) {
   const elements = createMarquee(block, document);
-  const table = window.WebImporter.DomUtils.createTable(elements, document);
-  table.classList.add('import-table');
+  const table = window.WebImporter.DOMUtils.createTable(elements, document);
   block.before(document.createElement('hr'));
-  block.replaceWith(...elements);
+  table.classList.add('import-table');
+  block.replaceWith(table);
 }
