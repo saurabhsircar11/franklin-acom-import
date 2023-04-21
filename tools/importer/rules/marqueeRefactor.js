@@ -5,7 +5,7 @@ import { flow } from '../utils.js';
  * @param {HTMLDivElement} block
  * @returns {HTMLImageElement}
  */
-function makeBGImage(block) {
+function makeBGImage(block, document) {
   const bgImage = block?.querySelector('div[style]');
   const image = bgImage?.getAttribute('style').split('"')[1];
   let imageUrl = [];
@@ -36,7 +36,7 @@ function makeBGColor(block) {
  * @param {HTMLDivElement} block
  * @returns {HTMLAnchorElement}
  */
-function makeVideo(block) {
+function makeVideo(block, document) {
   const videoWrapper = block?.querySelector('.video-Wrapper source');
   const backgroundVideoURL = videoWrapper.getAttribute('src');
   const a = document.createElement('a');
@@ -78,12 +78,12 @@ function createMarqueeHeader({ block }) {
  * @param {{block: HTMLDivElement}} inputParams
  * @returns {Array<String | HTMLAnchorElement | HTMLImageElement}
  */
-function createMarqueeBackground({ block }) {
+function createMarqueeBackground({ block, document }) {
   const isVideo = !!block?.querySelector('.video-Wrapper source');
   const isBackgroundColor = !!block?.querySelector('div[data-bgcolor]');
   const isBgImage = !!block.querySelector('div[style]');
   if (isVideo) {
-    const video = makeVideo(block);
+    const video = makeVideo(block, document);
     return [[video]];
   }
   if (isBackgroundColor) {
@@ -91,7 +91,7 @@ function createMarqueeBackground({ block }) {
     return [[bgcolor]];
   }
   if (isBgImage) {
-    const bgImage = makeBGImage(block);
+    const bgImage = makeBGImage(block, document);
     return [[bgImage]];
   }
   return [];
